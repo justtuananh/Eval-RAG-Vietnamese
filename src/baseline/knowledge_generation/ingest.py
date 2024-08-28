@@ -6,7 +6,7 @@ from langchain.docstore.document import Document as LangchainDocument
 import os
 import torch
 
-from baseline.docs_process.docs_split import split_documents
+from docs_process.docs_split import split_documents
 
 def load_embeddings(
     langchain_docs: List[LangchainDocument],
