@@ -14,7 +14,7 @@ def load_eval_data(dataset_name :str = "legal" ) :
     elif dataset_name == "expert" : 
         pass 
     
-    return dataset
+    return dataset['train']
 
 def preprocess() :
     pass 
@@ -22,6 +22,6 @@ def preprocess() :
 def document_transform(ds : Dataset) -> LangchainDocument:
     docs = [
     LangchainDocument(page_content=row["context"])
-    for  row in tqdm(ds['train'])
+    for  row in tqdm(ds)
 ]
     return docs
