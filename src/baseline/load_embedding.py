@@ -1,11 +1,11 @@
 from knowledge_generation.ingest import load_embeddings
 from docs_process import docs_split
-from docs_process.dataset_load import load_eval_data
-
-doc_splited = docs_split.split_documents(768, load_eval_data("legal"), tokenizer_name = "", is_tiktoken = True)
+from docs_process.dataset_load import document_transform, load_eval_data
 
 
-if __name__ == "__main__" :
+if __name__ == "__main__" : 
+    docs = document_transform(load_eval_data("legal"))
+    doc_splited = docs_split.split_documents(768, docs, tokenizer_name = "", is_tiktoken = True)
     knowledge_index = load_embeddings(
         doc_splited,
         512,
