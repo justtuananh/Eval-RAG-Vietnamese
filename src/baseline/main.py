@@ -25,7 +25,6 @@ def run_rag_tests(
             outputs = json.load(f)
     except:
         outputs = []
-    pr
     for example in tqdm(eval_dataset):
         question = example["question"]
         if question in [output["question"] for output in outputs]:
