@@ -14,3 +14,4 @@ if __name__ == "__main__" :
         vectorstore_type="Chroma",
     )
     
+    print(knowledge_index)
