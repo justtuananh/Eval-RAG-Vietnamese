@@ -1,4 +1,3 @@
-__all__ = ["ingest", "load_embedding"]
+__all__ = ["ingest"]
 
 from .ingest import *
-from ..load_embedding import *
