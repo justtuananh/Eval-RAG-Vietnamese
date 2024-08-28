@@ -1,0 +1,9 @@
+datasets
+langchain
+langchain-community
+langchain_openai
+langchain-groq
+tiktoken
+langchain-chroma
+faiss-gpu 
+sentence_transformers
