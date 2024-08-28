@@ -30,7 +30,7 @@ def load_embeddings(
     """
     embedding_model = HuggingFaceEmbeddings(
         model_name=embedding_model_name,
-        multi_process=True,
+        multi_process=False,
         model_kwargs={"device": torch.device('cuda' if torch.cuda.is_available() else 'cpu')},
         encode_kwargs={
             "normalize_embeddings": True  # Set True to compute cosine similarity
