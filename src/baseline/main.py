@@ -59,4 +59,4 @@ if __name__ == "__main__" :
     settings_name = f"chunk:{configfile.chunk_size}_embeddings:{configfile.embeddings.replace('/', '~')}_rerank:no_reader-model:Groq-Llama3-70b-8192_legalRAG"
     output_file_name = f"{configfile.eval_repo_dir}/output/rag_{settings_name}.json"
 
-    run_rag_tests(load_eval_data(configfile.eval_dataset) , llm= generator, knowledge_index= knowledge_index , output_file= output_file_name , verbose= True, test_settings= settings_name)
+    run_rag_tests(load_eval_data(configfile.data_name) , llm= generator, knowledge_index= knowledge_index , output_file= output_file_name , verbose= True, test_settings= settings_name)
