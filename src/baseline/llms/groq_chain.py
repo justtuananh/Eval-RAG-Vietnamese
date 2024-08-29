@@ -3,7 +3,7 @@ from langchain_groq import ChatGroq
 from dotenv import load_dotenv
 
 llm_api = load_dotenv(".env")
-api_keys = [os.getenv(f"llm_api_{i}") for i in range(1, 5)]  # Adjust range according to the number of API keys available
+api_keys = [os.getenv(f"llm_api_{i}") for i in range(1, 6)]  # Adjust range according to the number of API keys available
 print(api_keys)
 class Groq_Routing:
     def __init__(self, model_name="llama3-70b-8192", temperature=0, request_timeout=120, max_retries=50):
