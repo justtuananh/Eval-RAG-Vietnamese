@@ -18,7 +18,7 @@ class Groq_Routing:
         self.max_retries = max_retries
         self.api_keys = api_keys
         self.current_key_index = 0
-        self.api_usage = {key: {'requests': 0, 'tokens': 0, 'last_used': time.time()} for key in api_keys}
+        self.api_usage = {key: {'requests': 0, 'tokens': 0, 'last_used': time()} for key in api_keys}
         self.llm = self.initialize_llm(self.api_keys[self.current_key_index])
     
     def initialize_llm(self, api_key):
