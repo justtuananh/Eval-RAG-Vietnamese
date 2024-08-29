@@ -61,14 +61,22 @@ class Groq_Routing:
         return True
     def wait_for_reset(self, api_key):
         """
-        Wait until the API key's rate limits are reset.
+        Wait until the API key's usage resets based on rate limits.
         """
-        usage = self.api_usage[api_key]
-        time_since_last_use = time.time() - usage['last_used']
-        wait_time = 60 - time_since_last_use
-        if wait_time > 0:
-            print(f"Waiting {wait_time} seconds for API key {api_key} to reset...")
-            time.sleep(wait_time)
+        current_time = time()
+        last_used_time = self.api_usage[api_key]['last_used']
+        if last_used_time is None:
+            wait_time = 60  # Default wait time if `last_used` is not set
+        else:
+            elapsed_time = current_time - last_used_time
+            # Calculate remaining time until the API key can be used again
+            wait_time = max(0, 60 - elapsed_time)  # Assuming 60 seconds for rate limit reset
+
+        print(f"Waiting {wait_time:.2f} seconds for API key {api_key} to reset...")
+        time.sleep(wait_time)
+        # Reset the usage after waiting
+        self.api_usage[api_key]['requests'] = 0
+        self.api_usage[api_key]['tokens'] = 0
             
     def query_llm(self, prompt):
         """
@@ -78,7 +86,7 @@ class Groq_Routing:
             current_api_key = self.api_keys[self.current_key_index]
             if not self.check_limits(current_api_key):
                 print(f"API key {current_api_key} has reached its limit, waiting for reset...")
-                self.wait_for_reset(current_api_key)
+                self.switch_api_key()
                 continue
 
             try:
@@ -92,9 +100,10 @@ class Groq_Routing:
                 print(f"Error: {e}, switching to the next API key...")
                 self.switch_api_key()
                 continue
-
-        print("All API keys have failed or are exhausted.")
-        return None
+        current_api_key = self.api_keys[self.current_key_index] 
+        print(f"All API keys have been used. Waiting for API key {current_api_key} to reset...")
+        self.wait_for_reset(current_api_key) 
+        return self.query_llm(prompt)
 if __name__ == "__main__" :
     llm_router = Groq_Routing()
     response = llm_router.query_llm("What is the weather today?")
