@@ -1,19 +1,23 @@
 from langchain_core.prompts import PromptTemplate
 RAG_PROMPT_TEMPLATE = """
 <|system|>
-Using the information contained in the context,
-give a comprehensive answer to the question in Vietnamese language.
-Respond only to the question asked, response should be concise and relevant to the question.
-Provide the number of the source document when relevant.
-If the answer cannot be deduced from the context, do not give an answer. Say "tôi không biết" instead </s>
+Read the context below carefully and use the information to answer the question in Vietnamese. 
+
+- Provide a comprehensive but concise response, directly related to the question.
+- Include the number of the source document if your answer is based on specific information from the context.
+- If you cannot deduce the answer from the context, respond with "tôi không biết".
+
+Follow these instructions carefully to ensure clarity and accuracy in your response.
+</s>
 <|user|>
 Context:
 {context}
 ---
-Now here is the question you need to answer.
+Now, answer the following question:
 
 Question: {question}
 </s>
 <|assistant|>
+
 """
 accurate_rag_prompt = PromptTemplate.from_template(RAG_PROMPT_TEMPLATE)
