@@ -70,10 +70,11 @@ class Groq_Routing:
                 return response.content
             except Exception as e:
                 print(f"Error: {e}, switching to the next API key...")
+                self.api_usage[current_api_key]['requests'] = 0
+                self.api_usage[current_api_key]['tokens'] = 0
                 self.switch_api_key()
-        
+                continue
         print("All API keys have failed.")
-        return None
 if __name__ == "__main__" :
     llm_router = Groq_Routing()
     response = llm_router.query_llm("What is the weather today?")
