@@ -1,5 +1,5 @@
 import os
-import time
+from time import time, sleep
 from langchain_groq import ChatGroq
 from dotenv import load_dotenv
 
@@ -46,7 +46,7 @@ class Groq_Routing:
         """
         usage = self.api_usage[api_key]
         limits = rate_limits[self.model_name]
-        current_time = time.time()
+        current_time = time()
         time_since_last_use = current_time - usage['last_used']
 
         if time_since_last_use >= 60:
@@ -63,7 +63,7 @@ class Groq_Routing:
         """
         Wait until the API key's usage resets based on rate limits.
         """
-        current_time = time()
+        current_time = time.time()
         last_used_time = self.api_usage[api_key]['last_used']
         if last_used_time is None:
             wait_time = 60  # Default wait time if `last_used` is not set
@@ -73,7 +73,7 @@ class Groq_Routing:
             wait_time = max(0, 60 - elapsed_time)  # Assuming 60 seconds for rate limit reset
 
         print(f"Waiting {wait_time:.2f} seconds for API key {api_key} to reset...")
-        time.sleep(wait_time)
+        sleep(wait_time)
         # Reset the usage after waiting
         self.api_usage[api_key]['requests'] = 0
         self.api_usage[api_key]['tokens'] = 0
@@ -94,7 +94,7 @@ class Groq_Routing:
                 token_usage = response.response_metadata['token_usage']
                 self.api_usage[current_api_key]['requests'] += 1
                 self.api_usage[current_api_key]['tokens'] += token_usage['total_tokens']
-                self.api_usage[current_api_key]['last_used'] = time.time()  # Update the last used time
+                self.api_usage[current_api_key]['last_used'] = time()  # Update the last used time
                 return response.content
             except Exception as e:
                 print(f"Error: {e}, switching to the next API key...")
