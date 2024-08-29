@@ -1,4 +1,5 @@
 import os
+import time
 from langchain_groq import ChatGroq
 from dotenv import load_dotenv
 
@@ -17,7 +18,7 @@ class Groq_Routing:
         self.max_retries = max_retries
         self.api_keys = api_keys
         self.current_key_index = 0
-        self.api_usage = {key: {'requests': 0, 'tokens': 0} for key in api_keys}
+        self.api_usage = {key: {'requests': 0, 'tokens': 0, 'last_used': time.time()} for key in api_keys}
         self.llm = self.initialize_llm(self.api_keys[self.current_key_index])
     
     def initialize_llm(self, api_key):
@@ -45,13 +46,30 @@ class Groq_Routing:
         """
         usage = self.api_usage[api_key]
         limits = rate_limits[self.model_name]
+        current_time = time.time()
+        time_since_last_use = current_time - usage['last_used']
+
+        if time_since_last_use >= 60:
+            usage['requests'] = 0
+            usage['tokens'] = 0
+            usage['last_used'] = current_time
         
         if usage['requests'] >= limits['requests_per_minute']:
             return False
         if usage['tokens'] >= limits['tokens_per_minute']:
             return False
         return True
-    
+    def wait_for_reset(self, api_key):
+        """
+        Wait until the API key's rate limits are reset.
+        """
+        usage = self.api_usage[api_key]
+        time_since_last_use = time.time() - usage['last_used']
+        wait_time = 60 - time_since_last_use
+        if wait_time > 0:
+            print(f"Waiting {wait_time} seconds for API key {api_key} to reset...")
+            time.sleep(wait_time)
+            
     def query_llm(self, prompt):
         """
         Send a prompt to the LLM and handle exceptions by switching API keys if necessary.
@@ -59,22 +77,24 @@ class Groq_Routing:
         for attempt in range(len(self.api_keys)):
             current_api_key = self.api_keys[self.current_key_index]
             if not self.check_limits(current_api_key):
-                print(f"API key {current_api_key} has reached its limit, switching to the next key...")
-                self.switch_api_key()
+                print(f"API key {current_api_key} has reached its limit, waiting for reset...")
+                self.wait_for_reset(current_api_key)
                 continue
+
             try:
                 response = self.llm.invoke(prompt)
                 token_usage = response.response_metadata['token_usage']
                 self.api_usage[current_api_key]['requests'] += 1
                 self.api_usage[current_api_key]['tokens'] += token_usage['total_tokens']
+                self.api_usage[current_api_key]['last_used'] = time.time()  # Update the last used time
                 return response.content
             except Exception as e:
                 print(f"Error: {e}, switching to the next API key...")
-                self.api_usage[current_api_key]['requests'] = 0
-                self.api_usage[current_api_key]['tokens'] = 0
                 self.switch_api_key()
                 continue
-        print("All API keys have failed.")
+
+        print("All API keys have failed or are exhausted.")
+        return None
 if __name__ == "__main__" :
     llm_router = Groq_Routing()
     response = llm_router.query_llm("What is the weather today?")
