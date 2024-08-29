@@ -7,7 +7,7 @@ def load_eval_data(dataset_name :str = "legal" ) :
     Split documents into chunks of size `chunk_size` characters and return a list of documents.
     """
     if dataset_name  ==  "legal" :
-        dataset = load_dataset("tuananh18/Eval-RAG-Vietnamese", 'legal-data', cache_dir= "./")
+        dataset = load_dataset("tuananh18/Eval-RAG-Vietnamese", 'legal-data')
 
     elif dataset_name == "viQuAD" : 
         pass 
