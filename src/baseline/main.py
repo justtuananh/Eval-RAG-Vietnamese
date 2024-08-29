@@ -8,7 +8,7 @@ from RAG import answer_with_rag
 from llms.groq_chain import Groq_Routing
 from docs_process import load_eval_data
 import configfile
-from load_embedding import knowledge_index
+from load_embedding import knowledge_index as knowledge
 
 def run_rag_tests(
     eval_dataset: datasets.Dataset,
@@ -59,4 +59,4 @@ if __name__ == "__main__" :
     settings_name = f"chunk:{configfile.chunk_size}_embeddings:{configfile.embeddings.replace('/', '~')}_rerank:no_reader-model:Groq-Llama3-70b-8192_legalRAG"
     output_file_name = f"{configfile.eval_repo_dir}/output/rag_{settings_name}.json"
 
-    run_rag_tests(load_eval_data(configfile.data_name) , llm= Groq_Routing(), knowledge_index= knowledge_index , output_file= output_file_name , verbose= True, test_settings= settings_name)
+    run_rag_tests(load_eval_data(configfile.data_name) , llm= Groq_Routing(), knowledge_index= knowledge , output_file= output_file_name , verbose= True, test_settings= settings_name)
