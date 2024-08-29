@@ -11,8 +11,8 @@ def answer_with_rag(
     knowledge_index: VectorStore,
     model_type : Optional[str] = None,
     reranker: Optional[str] = None,
-    num_retrieved_docs: int = 3,
-    num_docs_final: int = 5,
+    num_retrieved_docs: int = 5,
+    num_docs_final: int = 3,
 ) -> Tuple[str, List[LangchainDocument]]:
     """Answer a question using RAG with the given knowledge index."""
     # Gather documents with retriever
@@ -38,6 +38,6 @@ def answer_with_rag(
     if model_type == "type something else like HF, OPENAI" :
       pass
     else :
-      answer = llm.invoke(final_prompt).content
+      answer = llm.query_llm(final_prompt)
 
     return answer, relevant_docs
