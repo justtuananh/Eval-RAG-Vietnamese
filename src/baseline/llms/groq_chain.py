@@ -63,7 +63,7 @@ class Groq_Routing:
         """
         Wait until the API key's usage resets based on rate limits.
         """
-        current_time = time.time()
+        current_time = time()
         last_used_time = self.api_usage[api_key]['last_used']
         if last_used_time is None:
             wait_time = 60  # Default wait time if `last_used` is not set
