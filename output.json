@@ -1,0 +1,16 @@
+{
+    "context": "Trong Thông tư này các từ ngữ dưới đây được hiểu như sau:\n1. Định mức kinh tế - kỹ thuật (sau đây gọi tắt là định mức): Là mức hao phí cần thiết về lao động về nguyên, nhiên vật liệu, máy móc thiết bị, dụng cụ và phương tiện để hoàn thành một đơn vị sản phẩm (hoặc một khối lượng công việc nhất định), trong một điều kiện cụ thể của các hoạt động điều tra cơ bản trong các lĩnh vực thuộc phạm vi quản lý nhà nước của Bộ.\n2. Dụng cụ là loại tài sản không đủ tiêu chuẩn về tài sản cố định theo quy định hiện hành của nhà nước mà người lao động sử dụng để tác động, biến đổi vật liệu thành sản phẩm (kìm, búa, cờ lê, quần áo bảo hộ và các dụng cụ khác tương tự).\n3. Vật liệu là đầu vào trong một quá trình sản xuất hoặc thực hiện nhiệm vụ chuyên môn cụ thể, được người lao động tác động, biến đổi hoàn toàn để thành sản phẩm theo yêu cầu đặt ra.\n4. Máy móc thiết bị là công cụ lao động thuộc tài sản cố định hữu hình và tài sản cố định vô hình theo tiêu chuẩn quy định hiện hành của nhà nước về tài sản cố định (không bao gồm nhà xưởng và quyền sử dụng đất) mà người lao động sử dụng để tác động, biến đổi vật liệu thành sản phẩm.",
+    "statements": [
+        "Dụng cụ trong ngành tài nguyên môi trường là loại tài sản không đủ tiêu chuẩn về tài sản cố định theo quy định hiện hành của nhà nước.",
+        "Dụng cụ trong ngành tài nguyên môi trường được người lao động sử dụng để tác động, biến đổi vật liệu thành sản phẩm.",
+        "Ví dụ của dụng cụ trong ngành tài nguyên môi trường bao gồm kìm, búa, cờ lê, quần áo bảo hộ và các dụng cụ khác tương tự.",
+        "Định mức kinh tế - kỹ thuật là mức hao phí cần thiết về lao động, nguyên, nhiên vật liệu, máy móc thiết bị, dụng cụ và phương tiện để hoàn thành một đơn vị sản phẩm trong một điều kiện cụ thể của các hoạt động điều tra cơ bản trong các lĩnh vực thuộc phạm vi quản lý nhà nước của Bộ.",
+        "Định mức kinh tế - kỹ thuật được gọi tắt là định mức.",
+        "Dụng cụ là loại tài sản không đủ tiêu chuẩn về tài sản cố định theo quy định hiện hành của nhà nước mà người lao động sử dụng để tác động, biến đổi vật liệu thành sản phẩm.",
+        "Ví dụ của dụng cụ bao gồm kìm, búa, cờ lê, quần áo bảo hộ và các dụng cụ khác tương tự.",
+        "Vật liệu là đầu vào trong một quá trình sản xuất hoặc thực hiện nhiệm vụ chuyên môn cụ thể được người lao động tác động, biến đổi hoàn toàn để thành sản phẩm theo yêu cầu đặt ra.",
+        "Máy móc thiết bị là công cụ lao động thuộc tài sản cố định hữu hình và tài sản cố định vô hình theo tiêu chuẩn quy định hiện hành của nhà nước về tài sản cố định.",
+        "Máy móc thiết bị không bao gồm nhà xưởng và quyền sử dụng đất.",
+        "Máy móc thiết bị được người lao động sử dụng để tác động, biến đổi vật liệu thành sản phẩm.,"
+    ]
+}
