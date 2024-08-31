@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from pathlib import Path
 from typing import Any, Callable, Dict, Iterable, List, Optional
 
 from langchain_core.callbacks import CallbackManagerForRetrieverRun
@@ -33,7 +34,8 @@ class BM25SRetriever(BaseRetriever):
     """Number of top results to return"""
     preprocess_func: Callable[[str], List[str]] = default_preprocessing_func
     """ Preprocessing function to use on the text before BM25 vectorization."""
-    
+    save_directory : Optional[str] = None
+    """ Directory for saving BM25S index."""
     class Config:
         arbitrary_types_allowed = True
     @classmethod
@@ -42,6 +44,7 @@ class BM25SRetriever(BaseRetriever):
         texts: Iterable[str],
         metadatas: Optional[Iterable[dict]] = None,
         bm25_params: Optional[Dict[str, Any]] = None,
+        save_directory : Optional[str] = save_directory,
         preprocess_func: Callable[[str], List[str]] = default_preprocessing_func,
         **kwargs: Any,
     ) -> BM25SRetriever:
@@ -64,24 +67,40 @@ class BM25SRetriever(BaseRetriever):
                 "Could not import bm25s, please install with `pip install "
                 "bm25s`."
             )
-
-        texts_processed = preprocess_func(texts)
         bm25_params = bm25_params or {}
-        vectorizer =BM25(**bm25_params)
-        vectorizer.index(texts_processed)
+        if save_directory and Path(save_directory).exists():
+            try:
+                vectorizer = BM25.load(save_directory)
+            except Exception as e:
+                print(f"Failed to load BM25 index from {save_directory}: {e}")
+                print("Proceeding with indexing from scratch.")
+                texts_processed = preprocess_func(texts)
+                vectorizer = BM25(**bm25_params)
+                vectorizer.index(texts_processed)
+                if save_directory:
+                    vectorizer.save(save_directory)
+        
+        else:
+            texts_processed = preprocess_func(texts)
+            vectorizer = BM25(**bm25_params)
+            vectorizer.index(texts_processed)
+            if save_directory:
+                vectorizer.save(save_directory)
+
         metadatas = metadatas or ({} for _ in texts)
         docs = [Document(page_content=t, metadata=m) for t, m in zip(texts, metadatas)]
         return cls(
-            vectorizer = vectorizer, docs=docs, preprocess_func=preprocess_func, **kwargs
+            vectorizer=vectorizer, docs=docs, preprocess_func=preprocess_func, save_directory=save_directory, **kwargs
         )
-
+        
     @classmethod
     def from_documents(
         cls,
-        documents: Iterable[Document], 
+        documents: Iterable[Document],
         *,
         bm25_params: Optional[Dict[str, Any]] = None,
         preprocess_func: Callable[[str], List[str]] = default_preprocessing_func,
+        
         **kwargs: Any,
     ) -> BM25SRetriever:
         """
