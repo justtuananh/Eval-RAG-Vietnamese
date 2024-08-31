@@ -50,12 +50,12 @@ class BM25SRetriever(BaseRetriever):
         Args:
             texts: A list of texts to vectorize.
             metadatas: A list of metadata dicts to associate with each text.
-            bm25_params: Parameters to pass to the BM25 vectorizer.
+            bm25s_params: Parameters to pass to the BM25s vectorizer.
             preprocess_func: A function to preprocess each text before vectorization.
             **kwargs: Any other arguments to pass to the retriever.
 
         Returns:
-            A BM25Retriever instance.
+            A BM25SRetriever instance.
         """
         try:
             from bm25s import BM25
@@ -109,4 +109,4 @@ class BM25SRetriever(BaseRetriever):
     ) -> List[Document]:
         processed_query = self.preprocess_func(query)
         return_docs, scores = self.vectorizer.retrieve(processed_query, self.docs, k = self.k)
-        return return_docs
+        return [return_docs[0, i] for i in range(return_docs.shape[1])]
