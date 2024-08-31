@@ -8,7 +8,6 @@ from langchain_core.documents import Document
 from langchain_core.pydantic_v1 import Field
 from langchain_core.retrievers import BaseRetriever
 import bm25s
-from itertools import chain
 
 def default_preprocessing_func(text: str) -> List[str]:
     token_corpus = bm25s.tokenize(texts=text, stopwords = "vi", return_ids= False , show_progress=False)
