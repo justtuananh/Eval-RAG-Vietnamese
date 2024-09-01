@@ -29,12 +29,14 @@ class BM25SRetriever(BaseRetriever):
     """ BM25S vectorizer."""
     docs: List[Document] = Field(repr=False)
     """List of documents to retrieve from."""
-    k: int = 4 
+    k: int = 4
     """Number of top results to return"""
     preprocess_func: Callable[[str], List[str]] = default_preprocessing_func
     """ Preprocessing function to use on the text before BM25 vectorization."""
     save_directory : Optional[str] = None
     """ Directory for saving BM25S index."""
+    activate_numba: bool = False
+    """Accelerate backend"""
     class Config:
         arbitrary_types_allowed = True
     @classmethod
@@ -78,7 +80,7 @@ class BM25SRetriever(BaseRetriever):
                 vectorizer.index(texts_processed)
                 if save_directory:
                     vectorizer.save(save_directory)
-        
+
         else:
             texts_processed = preprocess_func(texts)
             vectorizer = BM25(**bm25_params)
@@ -91,7 +93,7 @@ class BM25SRetriever(BaseRetriever):
         return cls(
             vectorizer=vectorizer, docs=docs, preprocess_func=preprocess_func, save_directory=save_directory, **kwargs
         )
-        
+
     @classmethod
     def from_documents(
         cls,
@@ -99,7 +101,7 @@ class BM25SRetriever(BaseRetriever):
         *,
         bm25_params: Optional[Dict[str, Any]] = None,
         preprocess_func: Callable[[str], List[str]] = default_preprocessing_func,
-        
+
         **kwargs: Any,
     ) -> BM25SRetriever:
         """
@@ -121,10 +123,15 @@ class BM25SRetriever(BaseRetriever):
             preprocess_func=preprocess_func,
             **kwargs,
         )
-        
+
     def _get_relevant_documents(
         self, query: str, *, run_manager: CallbackManagerForRetrieverRun
     ) -> List[Document]:
         processed_query = self.preprocess_func(query)
-        return_docs, scores = self.vectorizer.retrieve(processed_query, self.docs, k = self.k)
-        return [return_docs[0, i] for i in range(return_docs.shape[1])]
+        if self.activate_numba : 
+          self.vectorizer.activate_numba_scorer()
+          return_docs = self.vectorizer.retrieve(processed_query, k=self.k, backend_selection="numba")
+          return [self.docs[i] for i in return_docs.documents[0]]
+        else :  
+          return_docs, scores = self.vectorizer.retrieve(processed_query, self.docs, k = self.k)
+          return [return_docs[0, i] for i in range(return_docs.shape[1])]
