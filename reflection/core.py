@@ -24,7 +24,7 @@ class Reflection():
         print(higherLevelSummariesPrompt)
 
         completion = self.llm.chat.completions.create(
-            model="gpt-4o",
+            model="llama3-8b-8192",
             messages=[
                 {
                     "role": "user",
