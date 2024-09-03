@@ -1,3 +1,6 @@
 .env
 ragas
 __pycache__/
+bm25s
+thongtintuyensinh
+notebook/data_chroma
