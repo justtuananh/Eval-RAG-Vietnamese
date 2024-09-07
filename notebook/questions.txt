@@ -1,0 +1,47 @@
+Học viên sau khi tốt nghiệp sẽ được phân công công tác tại đâu?
+Học viên được hưởng những chế độ gì trong suốt thời gian đào tạo?
+Thân nhân học viên (bố, mẹ, con) sẽ được hưởng chế độ gì theo quy định?
+Ngành đào tạo này thuộc lĩnh vực nào?
+Mục đích của ngành đào tạo này là gì?
+Những kỹ năng nào sẽ được trang bị cho sinh viên sau khi tốt nghiệp ngành đào tạo này?
+
+</Output>
+Trường đại học này đào tạo bao nhiêu chuyên ngành thuộc các lĩnh vực khác nhau?
+Có những chuyên ngành đào tạo kỹ sư chất lượng cao nào tại trường đại học này?
+Các lĩnh vực nào được đào tạo tại trường đại học này?
+Mã trường của Học viện Kỹ thuật quân sự là gì?
+Tên ngành nào được tuyển sinh với mã ngành 7860220?
+Học viện Kỹ thuật quân sự sử dụng bao nhiêu mã ngành để tuyển sinh?
+Học viện Kỹ thuật Quân sự tuyển sinh theo phương thức nào trong các năm 2021, 2022, 2023?
+Xét tuyển thẳng và ưu tiên xét tuyển được thực hiện theo quy định của cơ quan nào?
+Kỳ thi nào được sử dụng làm cơ sở để xét tuyển vào Học viện Kỹ thuật Quân sự?
+Điểm trúng tuyển năm 2022 của thí sinh Nam có thường trú phía Bắc là bao nhiêu?
+Thí sinh Nữ có thường trú phía Nam có điểm trúng tuyển cao nhất vào năm nào?
+So sánh điểm trúng tuyển năm 2021 giữa thí sinh Nam có thường trú phía Bắc và thí sinh Nam có thường trú phía Nam, ai có điểm cao hơn?
+Điểm trúng tuyển của thí sinh Nam miền Bắc năm 2024 là bao nhiêu?
+Tiêu chí phụ nào có điểm cao nhất trong các tiêu chí phụ?
+Thí sinh Nữ miền Bắc và miền Nam có điểm trúng tuyển chênh lệch nhau bao nhiêu điểm?
+Kỳ tuyển sinh học viện kỹ thuật quân sự năm 2024 tuyển sinh trong phạm vi nào?
+Cơ quan nào quy định quy chế tuyển sinh cho học viện kỹ thuật quân sự năm 2024?
+Đối tượng nào được tham gia tuyển sinh vào học viện kỹ thuật quân sự năm 2024?
+Tổng chỉ tiêu của trường là bao nhiêu?
+Số chỉ tiêu đào tạo trong nước chiếm bao nhiêu phần trăm tổng chỉ tiêu?
+Có bao nhiêu chỉ tiêu đào tạo tại nước ngoài?
+Phương thức xét tuyển thẳng và ưu tiên xét tuyển được thực hiện theo quy định của cơ quan nào?
+Có bao nhiêu phương thức xét tuyển được áp dụng trong trường này?
+Xét tuyển học sinh giỏi bậc THPT là một trong những phương thức xét tuyển của trường này?
+Tổ hợp xét tuyển A00 và A01 có điểm trúng tuyển giống nhau không?
+Điểm trúng tuyển có phân biệt theo khu vực địa lý và giới tính không?
+Những môn học nào được sử dụng trong tổ hợp xét tuyển A00?
+Thí sinh cần thực hiện bao nhiêu bước để đăng ký xét tuyển đào tạo Kỹ sư quân sự?
+Ở đâu thí sinh cần làm hồ sơ đăng ký tại Bước 1?
+Học viện sẽ thông báo gì về thí sinh đã hoàn thành sơ tuyển tại Bước 1?
+Học viện sẽ đào tạo kỹ sư dân sự phục vụ cho ngành nào?
+Khi nào Học viện sẽ thông báo tổ chức tuyển sinh?
+Cơ quan nào sẽ giao chỉ tiêu cho Học viện để tổ chức tuyển sinh?
+Học viện Kỹ thuật quân sự đào tạo bao nhiêu ngành và chuyên ngành?
+Những lĩnh vực nào được đào tạo tại Học viện Kỹ thuật quân sự?
+Hai chuyên ngành nào được đào tạo kỹ sư chất lượng cao tại Học viện Kỹ thuật quân sự?
+Thời gian đào tạo của chương trình này là bao nhiêu năm?
+Chương trình này có thời gian đào tạo ngắn hay dài?
+Có thể hoàn thành chương trình này trong bao nhiêu năm?
